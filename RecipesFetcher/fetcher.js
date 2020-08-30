@@ -1,4 +1,6 @@
 let ricardoFetcher = require("./Ricardo/ricardo-fetcher.js");
+let { RecipeRepository } = require("./recipeRepository");
 
-var fetcher = new ricardoFetcher.RicardoFetcher(null);
+let recipeRepo = new RecipeRepository();
+var fetcher = new ricardoFetcher.RicardoFetcher(recipeRepo);
 fetcher.fetch();

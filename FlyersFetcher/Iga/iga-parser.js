@@ -13,7 +13,7 @@ class FlyerPageParser {
         let json = this.html.match(/window\['flyerData'\] = (.*);/)[1];
 
         let flyerData = JSON.parse(json);
-        let urls = flyerData.items.map(i => i.url);
+        let urls = flyerData.items.map(i => i.url).filter(x => x);
 
         return urls;
     }
@@ -26,7 +26,10 @@ class ProductOfferPageParser {
     getOffer() {
         const flyerDom = new JSDOM(this.html);
         const $ = (require('jquery'))(flyerDom.window);
-        return JSON.parse($("[data-product]")[0].getAttribute("data-product").replace(/'/g, '"'));
+        let data_product = $("[data-product]")[0];
+        if (data_product) {
+            return JSON.parse(data_product.getAttribute("data-product").replace(/'/g, '"'));
+        }
     }
 }
 
