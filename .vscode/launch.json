@@ -61,6 +61,15 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\MatchMaking\\matcher.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Recipe API",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\Recipes\\api.js"
         }
     ],
     "compounds": [
