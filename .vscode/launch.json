@@ -5,6 +5,37 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "client: chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/admin"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "server: nuxt",
+            "args": [
+                "dev"
+            ],
+            "osx": {
+                "program": "${workspaceFolder}/admin/node_modules/.bin/nuxt"
+            },
+            "linux": {
+                "program": "${workspaceFolder}/admin/node_modules/.bin/nuxt"
+            },
+            "windows": {
+                "program": "${workspaceFolder}/admin/node_modules/nuxt/bin/nuxt.js"
+            }
+        },
+        {
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "pwa-chrome",
+            "webRoot": "${workspaceFolder}/admin"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Launch Iga Flyers Fetcher",
@@ -31,5 +62,18 @@
             ],
             "program": "${workspaceFolder}\\MatchMaking\\matcher.js"
         }
+    ],
+    "compounds": [
+        {
+            "name": "fullstack: nuxt",
+            "configurations": [
+                "server: nuxt",
+                "client: chrome"
+            ]
+        }
+    ],
+    "resolveSourceMapLocations": [
+        "${workspaceFolder}/admin/**",
+        "!**/node_modules/**"
     ]
 }
