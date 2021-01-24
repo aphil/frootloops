@@ -7,33 +7,21 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "client: chrome",
+            "name": "admin client: chrome",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}/admin"
+            "webRoot": "${workspaceFolder}/Admin"
         },
         {
             "type": "node",
             "request": "launch",
-            "name": "server: nuxt",
+            "name": "admin server: nuxt",
             "args": [
                 "dev"
             ],
-            "osx": {
-                "program": "${workspaceFolder}/admin/node_modules/.bin/nuxt"
-            },
-            "linux": {
-                "program": "${workspaceFolder}/admin/node_modules/.bin/nuxt"
-            },
+            "cwd": "${workspaceFolder}/admin",
             "windows": {
                 "program": "${workspaceFolder}/admin/node_modules/nuxt/bin/nuxt.js"
             }
-        },
-        {
-            "name": "Attach to Chrome",
-            "port": 9222,
-            "request": "attach",
-            "type": "pwa-chrome",
-            "webRoot": "${workspaceFolder}/admin"
         },
         {
             "type": "node",
@@ -65,7 +53,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Recipe API",
+            "name": "recipe API",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -76,8 +64,9 @@
         {
             "name": "fullstack: nuxt",
             "configurations": [
-                "server: nuxt",
-                "client: chrome"
+                "admin server: nuxt",
+                "admin client: chrome",
+                "recipe API"
             ]
         }
     ],
