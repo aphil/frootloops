@@ -5,6 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "admin client: chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/Admin"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "admin server: nuxt",
+            "args": [
+                "dev"
+            ],
+            "cwd": "${workspaceFolder}/admin",
+            "windows": {
+                "program": "${workspaceFolder}/admin/node_modules/nuxt/bin/nuxt.js"
+            }
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Launch Iga Flyers Fetcher",
@@ -30,6 +49,39 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\MatchMaking\\matcher.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "recipe API",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\Recipes\\api.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "recipe fetcher API",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\RecipesFetcher\\api.js"
         }
+    ],
+    "compounds": [
+        {
+            "name": "fullstack: nuxt",
+            "configurations": [
+                "admin server: nuxt",
+                "admin client: chrome",
+                "recipe API",
+                "recipe fetcher API"
+            ]
+        }
+    ],
+    "resolveSourceMapLocations": [
+        "${workspaceFolder}/admin/**",
+        "!**/node_modules/**"
     ]
 }

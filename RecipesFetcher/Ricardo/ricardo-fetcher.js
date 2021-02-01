@@ -8,16 +8,21 @@ const domain = "https://www.ricardocuisine.com";
 class RicardoFetcher {
   constructor(recipesRepository) {
     this.recipesRepository = recipesRepository;
+    this.index = 0;
+    this.status = "stopped";
   }
 
   async fetch() {
     let iterator = new RecipeIterator();
-    let index = 1;
+    this.index = 1;
+    this.status = "running";
     for await (const recipe of iterator.Iterate()) {
-      this.recipesRepository.create(recipe);
-      console.log(`Recipe ${recipe.name} created (${index})`);
-      index++;
+      await this.recipesRepository.create(recipe);
+      console.log(`Recipe ${recipe.name} created (${this.index})`);
+      this.index++;
     }
+
+    this.status = "done";
   }
 }
 
@@ -28,7 +33,7 @@ class RecipeIterator {
     const ricardoIngredientsParser = new ricardoParsers.IngredientsPageParser(
       ingredientsHtml
     );
-    const ingredientsUrls = ricardoIngredientsParser.getUrls();//.slice(0, n);
+    const ingredientsUrls = ricardoIngredientsParser.getUrls().slice(0, n);
     console.log(`${ingredientsUrls.length} recipes found`);
     for (let i = 0; i < ingredientsUrls.length; i++) {
       let ingredientUrl = ingredientsUrls[i];
@@ -36,17 +41,17 @@ class RecipeIterator {
       const ingredientRecipesParser = new ricardoParsers.IngredientRecipesPageParser(
         ingredientRecipesHtml
       );
-      const recipesUrls = ingredientRecipesParser.getUrls();//.slice(0, n);
+      const recipesUrls = ingredientRecipesParser.getUrls().slice(0, n);
       for (let j = 0; j < recipesUrls.length; j++) {
         let recipeUrl = recipesUrls[j];
         let recipeHtml = await httpGet(domain + recipeUrl);
         const recipeParser = new ricardoParsers.RecipeParser(recipeHtml);
         try {
-            let recipe = recipeParser.parse();
-            yield recipe;
-        } catch(e) {
-            console.error(`failed to parse recipe at ${domain + recipeUrl}`);
-        }        
+          let recipe = recipeParser.parse();
+          yield recipe;
+        } catch (e) {
+          console.error(`failed to parse recipe at ${domain + recipeUrl}`);
+        }
       }
     }
   }
