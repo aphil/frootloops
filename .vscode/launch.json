@@ -58,6 +58,15 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\Recipes\\api.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "recipe fetcher API",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\RecipesFetcher\\api.js"
         }
     ],
     "compounds": [
@@ -66,7 +75,8 @@
             "configurations": [
                 "admin server: nuxt",
                 "admin client: chrome",
-                "recipe API"
+                "recipe API",
+                "recipe fetcher API"
             ]
         }
     ],
