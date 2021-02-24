@@ -2,10 +2,23 @@
   <div class="container">
     <div>
       <h1>[Recettes]</h1>
-      <div v-on:click.stop.prevent="fetch">[Obtenir les recettes]</div>
-      <div @click="deleteAll">[Supprimer les recettes]</div>
-      <fetcher-status v-if="fetcherStatus != 'stopped'" :index="fetcherIndex" :status="fetcherStatus"></fetcher-status>
+      <div v-on:click.stop.prevent="fetchRecipes">[Obtenir les recettes]</div>
+      <div @click="deleteAllRecipes">[Supprimer les recettes]</div>
+      <fetcher-status
+        v-if="recipesFetcherStatus != 'stopped'"
+        :index="recipesFetcherIndex"
+        :status="recipesFetcherStatus"
+      ></fetcher-status>
       <recipe-list :recipes="recipes"></recipe-list>
+      <h1>[Circulaire]</h1>
+      <div v-on:click.stop.prevent="fetchFlyers">[Obtenir les offres]</div>
+      <div @click="deleteAllFlyers">[Supprimer les offres]</div>
+      <fetcher-status
+        v-if="flyersFetcherStatus != 'stopped'"
+        :index="flyersFetcherIndex"
+        :status="flyersFetcherStatus"
+      ></fetcher-status>
+      <flyers-list :flyers="flyers"></flyers-list>
     </div>
   </div>
 </template>
@@ -13,19 +26,40 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import RecipeList from "../components/RecipeList.vue";
+import FlyersList from "../components/FlyersList.vue";
 import FetcherStatus from "@/components/FetcherStatus.vue";
 export default {
-  components: { RecipeList, FetcherStatus },
+  components: { RecipeList, FlyersList, FetcherStatus },
   async asyncData({ store, params }) {
-    await store.dispatch("recipe/getRecipes");
+    let getRecipes = store.dispatch("recipe/getRecipes");
+    let getFlyers = store.dispatch("flyer/getFlyers");
+
+    await getRecipes;
+    await getFlyers;
   },
 
   computed: {
-    ...mapState("recipe", ["recipes", "fetcherIndex", "fetcherStatus"]),
+    ...mapState("recipe", {
+      recipes: "recipes",
+      recipesFetcherIndex: "fetcherIndex",
+      recipesFetcherStatus: "fetcherStatus",
+    }),
+    ...mapState("flyer", {
+      flyers: "flyers",
+      flyersFetcherIndex: "fetcherIndex",
+      flyersFetcherStatus: "fetcherStatus",
+    }),
   },
 
   methods: {
-    ...mapActions("recipe", ["fetch", "deleteAll"]),
+    ...mapActions("recipe", {
+      fetchRecipes: "fetch",
+      deleteAllRecipes: "deleteAll",
+    }),
+    ...mapActions("flyer", {
+      fetchFlyers: "fetch",
+      deleteAllFlyers: "deleteAll",
+    }),
   },
 };
 </script>

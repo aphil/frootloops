@@ -67,6 +67,24 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\RecipesFetcher\\api.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "flyers fetcher API",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\FlyersFetcher\\api.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "flyers API",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\Flyers\\api.js"
         }
     ],
     "compounds": [
@@ -76,7 +94,9 @@
                 "admin server: nuxt",
                 "admin client: chrome",
                 "recipe API",
-                "recipe fetcher API"
+                "recipe fetcher API",
+                "flyers fetcher API",
+                "flyers API"
             ]
         }
     ],

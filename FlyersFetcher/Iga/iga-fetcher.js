@@ -13,17 +13,18 @@ class IgaFetcher {
   constructor() {
     this.flyerRepo = new FlyerRepository();
     this.browser = null;
+    this.index = 0;
   }
 
   async fetch() {
     this.browser = await puppeteer.launch();
     let iterator = new FlyerIterator();
-    let index = 1;
+    this.index = 1;
     for await (const offer of iterator.Iterate(this.browser)) {
       try {
         this.flyerRepo.create(offer);
-        console.log(`offer ${offer.FullDisplayName} created (${index})`);
-        index++;
+        console.log(`offer ${offer.FullDisplayName} created (${this.index})`);
+        this.index++;
       } catch (e) {
         console.error(e);
       }
@@ -73,6 +74,6 @@ async function httpGet(browser2, url) {
   let bodyHTML = await page.evaluate(() => document.body.innerHTML);
   await browser.close();
   return bodyHTML;
-  }
+}
 
 module.exports.IgaFetcher = IgaFetcher;

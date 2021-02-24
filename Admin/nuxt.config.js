@@ -50,6 +50,14 @@ export default {
   },
 
   proxy: {
+    '/api/flyers/fetcher': {
+      target: 'http://localhost:3005',
+      pathRewrite: { '^/api/': '' }
+    },
+    '/api/flyers': {
+      target: 'http://localhost:3004',
+      pathRewrite: { '^/api/': '' }
+    },
     '/api/recipes/fetcher': {
       target: 'http://localhost:3003',
       pathRewrite: { '^/api/': '' }
