@@ -5,7 +5,6 @@ const indexName = "frootloops-fr";
 class FlyersRepository {
     async GetAll() {
         let flyersResponse = (await client.search({
-            size: 50,
             index: indexName,
             body: {
                 query: {

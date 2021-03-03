@@ -49,7 +49,7 @@ class RecipeParser {
         let recipeJsonText = $("script[type='application/ld+json']").html();
         let jsonLdRecipe = JSON.parse(recipeJsonText);
         let canonicalUrl = $("link[rel='canonical']").attr("href");
-        return new Recipe(jsonLdRecipe.name, jsonLdRecipe.recipeIngredient, canonicalUrl);
+        return new Recipe(jsonLdRecipe.name, jsonLdRecipe.recipeIngredient, canonicalUrl, jsonLdRecipe.image);
     }
 }
 

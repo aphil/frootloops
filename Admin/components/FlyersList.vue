@@ -3,6 +3,7 @@
     <ul>
         <li v-for="flyer in flyers" :key="flyer.id">
             {{ flyer.name }}
+            <img :src="flyer.imageUrl" />
         </li>
     </ul>
     </div>

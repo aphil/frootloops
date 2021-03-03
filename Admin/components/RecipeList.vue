@@ -3,6 +3,7 @@
     <ul>
         <li v-for="recipe in recipes" :key="recipe.id">
             {{ recipe.name }}
+            <img :src="recipe.imageUrl" width="250px" />
         </li>
     </ul>
     </div>

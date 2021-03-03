@@ -22,7 +22,8 @@ class RecipeRepository {
             return {
                 name: hit._source.name,
                 ingredients: hit._source.ingredients,
-                sourceUrl: hit._source.url
+                sourceUrl: hit._source.url,
+                imageUrl: hit._source.imageUrl
             }
         });
 
