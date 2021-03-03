@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <v-container>
     <div>
       <h1>[Recettes]</h1>
-      <div v-on:click.stop.prevent="fetchRecipes">[Obtenir les recettes]</div>
-      <div @click="deleteAllRecipes">[Supprimer les recettes]</div>
+      <v-btn v-on:click.stop.prevent="fetchRecipes">[Obtenir les recettes]</v-btn>
+      <v-btn @click="deleteAllRecipes">[Supprimer les recettes]</v-btn>
       <fetcher-status
         v-if="recipesFetcherStatus != 'stopped'"
         :index="recipesFetcherIndex"
@@ -11,8 +11,8 @@
       ></fetcher-status>
       <recipe-list :recipes="recipes"></recipe-list>
       <h1>[Circulaire]</h1>
-      <div v-on:click.stop.prevent="fetchFlyers">[Obtenir les offres]</div>
-      <div @click="deleteAllFlyers">[Supprimer les offres]</div>
+      <v-btn v-on:click.stop.prevent="fetchFlyers">[Obtenir les offres]</v-btn>
+      <v-btn @click="deleteAllFlyers">[Supprimer les offres]</v-btn>
       <fetcher-status
         v-if="flyersFetcherStatus != 'stopped'"
         :index="flyersFetcherIndex"
@@ -20,7 +20,7 @@
       ></fetcher-status>
       <flyers-list :flyers="flyers"></flyers-list>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>

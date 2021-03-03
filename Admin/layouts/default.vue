@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <Nuxt />
-  </div>
+  <v-app dark>
+    <v-app-bar color="primary" dense fixed clipped-left app>
+      <v-toolbar-title class="mr-5 align-center">
+        <span class="title">Frootloops</span>
+      </v-toolbar-title>
+    </v-app-bar>
+    <v-content>
+      <Nuxt />
+    </v-content>
+  </v-app>
 </template>
 
 <style>
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
