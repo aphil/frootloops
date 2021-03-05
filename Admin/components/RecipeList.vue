@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-layout row wrap>
     <v-card
       v-for="recipe in recipes"
       :key="recipe.id"
@@ -9,7 +9,7 @@
       <v-card-title>{{ recipe.name }}</v-card-title>
       <v-img :src="recipe.imageUrl" height="250px"></v-img>
     </v-card>
-  </div>
+  </v-layout>
 </template>
 
 <script>
