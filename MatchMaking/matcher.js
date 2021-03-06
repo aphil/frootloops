@@ -93,6 +93,6 @@ const indexName = "frootloops-fr";
     `
   })
 
-  fs.writeFileSync("C:\\temp\\recipes.html", html);
+  fs.writeFileSync("C:\\temp\\recipes.html", html.join(""));
   // console.log(recipes);
 })();
