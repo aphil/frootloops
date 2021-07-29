@@ -1,0 +1,59 @@
+version: "3.9"
+services:
+  adminweb:
+    build: ./Admin
+    environment: 
+      - FLYERS_FETCHER_URL=http://flyersfetcher:3005
+      - FLYERS_URL=http://flyers:3004
+      - RECIPES_FETCHER_URL=http://recipesfetcher:3003
+      - RECIPES_URL=http://recipes:3002
+    ports:
+      - "3000:3000"
+  flyers:
+    build: ./Flyers
+    ports:
+      - "3004:3004"
+    environment: 
+      - ELASTIC_SEARCH_URL=http://es01:9200
+  flyersfetcher:
+    build: ./FlyersFetcher
+    ports:
+      - "3005:3005"   
+    environment: 
+      - ELASTIC_SEARCH_URL=http://es01:9200 
+  recipesfetcher:
+    build: ./RecipesFetcher
+    ports:
+      - "3003:3003"
+    environment: 
+      - ELASTIC_SEARCH_URL=http://es01:9200
+  recipes:
+    build: ./Recipes
+    ports:
+      - "3002:3002"
+    environment: 
+      - ELASTIC_SEARCH_URL=http://es01:9200
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.1
+    container_name: es01
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.8.1
+    environment:
+      ELASTICSEARCH_URL: http://es01:9200
+      ELASTICSEARCH_HOSTS: http://es01:9200
+    ports:
+        - 5601:5601
+    depends_on:
+      - es01

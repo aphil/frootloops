@@ -1,6 +1,6 @@
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
-  target: 'static',
+  target: 'server',
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -57,19 +57,19 @@ export default {
 
   proxy: {
     '/api/flyers/fetcher': {
-      target: 'http://localhost:3005',
+      target: "http://flyersfetcher:3005",
       pathRewrite: { '^/api/': '' }
     },
     '/api/flyers': {
-      target: 'http://localhost:3004',
+      target: "http://flyers:3004",
       pathRewrite: { '^/api/': '' }
     },
     '/api/recipes/fetcher': {
-      target: 'http://localhost:3003',
+      target: "http://recipesfetcher:3003",
       pathRewrite: { '^/api/': '' }
     },
     '/api/recipes': {
-      target: 'http://localhost:3002',
+      target: "http://recipes:3002",
       pathRewrite: { '^/api/': '' }
     }
   }
