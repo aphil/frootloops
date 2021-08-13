@@ -17,7 +17,7 @@ class IgaFetcher {
   }
 
   async fetch() {
-    this.browser = await puppeteer.launch();
+    this.browser = await puppeteer.launch({args: ["--no-sandbox"]});
     let iterator = new FlyerIterator();
     this.index = 1;
     for await (const offer of iterator.Iterate(this.browser)) {
@@ -63,8 +63,7 @@ class FlyerIterator {
   }
 }
 
-async function httpGet(browser2, url) {
-  let browser = await puppeteer.launch();
+async function httpGet(browser, url) {
   const page = await browser.newPage();
   await page.setUserAgent(
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36"
@@ -72,7 +71,7 @@ async function httpGet(browser2, url) {
   await page.goto(url);
 
   let bodyHTML = await page.evaluate(() => document.body.innerHTML);
-  await browser.close();
+  await page.close();
   return bodyHTML;
 }
 
