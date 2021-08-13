@@ -24,6 +24,25 @@
             }
         },
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "public client: chrome",
+            "url": "http://localhost:4000",
+            "webRoot": "${workspaceFolder}/public-website"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "public server: nuxt",
+            "args": [
+                "dev"
+            ],
+            "cwd": "${workspaceFolder}/public-website",
+            "windows": {
+                "program": "${workspaceFolder}/public-website/node_modules/nuxt/bin/nuxt.js"
+            }
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Launch Iga Flyers Fetcher",
@@ -44,11 +63,11 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Matchmaking",
+            "name": "Launch Matchmaking api",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\MatchMaking\\matcher.js"
+            "program": "${workspaceFolder}\\MatchMaking\\api.js"
         },
         {
             "type": "node",
@@ -89,7 +108,7 @@
     ],
     "compounds": [
         {
-            "name": "fullstack: nuxt",
+            "name": "fullstack: admin",
             "configurations": [
                 "admin server: nuxt",
                 "admin client: chrome",
@@ -97,6 +116,18 @@
                 "recipe fetcher API",
                 "flyers fetcher API",
                 "flyers API"
+            ]
+        },
+        {
+            "name": "fullstack: public",
+            "configurations": [
+                "public server: nuxt",
+                "public client: chrome",
+                "recipe API",
+                "recipe fetcher API",
+                "flyers fetcher API",
+                "flyers API",
+                "Launch Matchmaking api"
             ]
         }
     ],
