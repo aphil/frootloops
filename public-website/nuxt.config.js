@@ -42,6 +42,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxt/http',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -82,5 +83,17 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  http: {
+    proxy: true,
+    //debug: true
+  },
+
+  proxy: {
+    '/api/matches': {
+      target: 'http://localhost:3006',
+      pathRewrite: { '^/api/': '' }
+    }
   }
 }

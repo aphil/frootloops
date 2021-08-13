@@ -63,11 +63,11 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Matchmaking",
+            "name": "Launch Matchmaking api",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\MatchMaking\\matcher.js"
+            "program": "${workspaceFolder}\\MatchMaking\\api.js"
         },
         {
             "type": "node",
@@ -126,7 +126,8 @@
                 "recipe API",
                 "recipe fetcher API",
                 "flyers fetcher API",
-                "flyers API"
+                "flyers API",
+                "Launch Matchmaking api"
             ]
         }
     ],
