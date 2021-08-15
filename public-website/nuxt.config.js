@@ -92,7 +92,7 @@ export default {
 
   proxy: {
     '/api/matches': {
-      target: 'http://localhost:3006',
+      target: 'http://matchmaking:3006',
       pathRewrite: { '^/api/': '' }
     }
   }

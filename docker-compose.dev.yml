@@ -9,6 +9,12 @@ services:
       - RECIPES_URL=http://recipes:3002
     ports:
       - "3000:3000"
+  publicwebsite:
+    build: ./public-website
+    environment: 
+      - MATCHMAKING_URL=http://matchmaking:3006
+    ports:
+      - "4000:4000"
   flyers:
     build: ./Flyers
     ports:
@@ -31,6 +37,12 @@ services:
     build: ./Recipes
     ports:
       - "3002:3002"
+    environment: 
+      - ELASTIC_SEARCH_URL=http://es01:9200
+  matchmaking:
+    build: ./MatchMaking
+    ports:
+      - "3006:3006"
     environment: 
       - ELASTIC_SEARCH_URL=http://es01:9200
   es01:
