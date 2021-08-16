@@ -48,6 +48,7 @@ class MatchesRepository {
                 ingredients: x._source.ingredients,
                 imageUrl: x._source.imageUrl,
                 highlight: x.highlight
+                
             }
         });
 
