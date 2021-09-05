@@ -8,6 +8,9 @@ WORKDIR /usr/src/nuxt-app
 RUN apk update && apk upgrade
 RUN apk add git
 
+# Install python for node-gyp dependency
+RUN apk add g++ make py3-pip
+
 # copy the app, note .dockerignore
 COPY . /usr/src/nuxt-app/
 RUN npm install
