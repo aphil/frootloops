@@ -2,7 +2,7 @@
   "name": "frootloops.matchmaking",
   "version": "0.0.1",
   "description": "",
-  "main": "matcher.js",
+  "main": "api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

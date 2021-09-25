@@ -43,6 +43,7 @@ services:
     build: ./MatchMaking
     ports:
       - "3006:3006"
+      - "9229:9229"
     environment: 
       - ELASTIC_SEARCH_URL=http://es01:9200
   es01:

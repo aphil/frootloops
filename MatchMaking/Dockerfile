@@ -9,4 +9,5 @@ COPY . .
 # WORKDIR /app
 
 EXPOSE 3006
-CMD [ "node", "api.js" ]
+EXPOSE 9229
+CMD [ "node", "--inspect=0.0.0.0:9229", "api.js" ]
