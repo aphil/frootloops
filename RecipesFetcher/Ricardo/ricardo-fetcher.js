@@ -33,7 +33,7 @@ class RecipeIterator {
     const ricardoIngredientsParser = new ricardoParsers.IngredientsPageParser(
       ingredientsHtml
     );
-    const ingredientsUrls = ricardoIngredientsParser.getUrls().slice(0, n);
+    const ingredientsUrls = ricardoIngredientsParser.getUrls()/*.slice(0, n)*/;
     console.log(`${ingredientsUrls.length} recipes found`);
     for (let i = 0; i < ingredientsUrls.length; i++) {
       let ingredientUrl = ingredientsUrls[i];
@@ -41,7 +41,7 @@ class RecipeIterator {
       const ingredientRecipesParser = new ricardoParsers.IngredientRecipesPageParser(
         ingredientRecipesHtml
       );
-      const recipesUrls = ingredientRecipesParser.getUrls().slice(0, n);
+      const recipesUrls = ingredientRecipesParser.getUrls()/*.slice(0, n)*/;
       for (let j = 0; j < recipesUrls.length; j++) {
         let recipeUrl = recipesUrls[j];
         let recipeHtml = await httpGet(domain + recipeUrl);

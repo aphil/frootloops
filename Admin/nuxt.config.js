@@ -57,19 +57,19 @@ export default {
 
   proxy: {
     '/api/flyers/fetcher': {
-      target: "http://flyersfetcher:3005",
+      target: process.env.FLYERS_FETCHER_URL || "http://localhost:3005",
       pathRewrite: { '^/api/': '' }
     },
     '/api/flyers': {
-      target: "http://flyers:3004",
+      target: process.env.FLYERS_URL || "http://localhost:3004",
       pathRewrite: { '^/api/': '' }
     },
     '/api/recipes/fetcher': {
-      target: "http://recipesfetcher:3003",
+      target: process.env.RECIPES_FETCHER_URL || "http://localhost:3003",
       pathRewrite: { '^/api/': '' }
     },
     '/api/recipes': {
-      target: "http://recipes:3002",
+      target: process.env.RECIPES_URL || "http://localhost:3002",
       pathRewrite: { '^/api/': '' }
     }
   }

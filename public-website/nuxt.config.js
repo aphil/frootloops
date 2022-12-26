@@ -92,7 +92,7 @@ export default {
 
   proxy: {
     '/api/matches': {
-      target: 'http://localhost:3006',
+      target: process.env.MATCHMAKING_URL || 'http://localhost:3006',
       pathRewrite: { '^/api/': '' }
     }
   }
