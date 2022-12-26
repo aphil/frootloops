@@ -1,5 +1,5 @@
 const { Client } = require("@elastic/elasticsearch");
-const client = new Client({ node: "http://localhost:9200" });
+const client = new Client({ node: process.env.ELASTIC_SEARCH_URL || "http://localhost:9200" });
 const indexName = "frootloops-fr";
 
 class MatchesRepository {
@@ -16,7 +16,11 @@ class MatchesRepository {
                     },
                 },
             })
-        ).body.hits.hits.map((x) => x._source);
+        ).body.hits.hits;
+
+        let clauses = flyers.map((f) => {
+            return { match_phrase: { ingredients: { query: f._source.FullDisplayName, _name: f._id }}};
+        });
 
         let receipesResponse = (await client.search({
             size: 50,
@@ -24,9 +28,8 @@ class MatchesRepository {
             body: {
                 query: {
                     bool: {
-                        should: flyers.map((f) => {
-                            return { match_phrase: { ingredients: f.FullDisplayName } };
-                        }),
+                        minimum_should_match: 1,
+                        should: clauses,
                         filter: {
                             match: { fl_type: "Recipe" },
                         },
@@ -42,12 +45,13 @@ class MatchesRepository {
             },
         }));
 
-        let recipes = receipesResponse.body.hits.hits.map(x => {
+        let recipes = receipesResponse.body.hits.hits.filter(x => x.highlight != null).map(x => {
             return {
                 name: x._source.name,
                 ingredients: x._source.ingredients,
                 imageUrl: x._source.imageUrl,
-                highlight: x.highlight
+                highlight: x.highlight.ingredients,
+                flyers: x.matched_queries.map(match => flyers.find(fl => fl._id == match)._source)
             }
         });
 

@@ -9,6 +9,10 @@
     >
       <v-card-title>{{ recipe.name }}</v-card-title>
       <v-img :src="recipe.imageUrl" height="250px"></v-img>
+      <v-card-text 
+        v-for="ingredient in recipe.highlight"
+        :key="ingredient"
+        v-html="ingredient"></v-card-text>
     </v-card>
   </v-layout>
 </template>
