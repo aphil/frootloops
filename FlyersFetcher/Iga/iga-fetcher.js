@@ -2,8 +2,9 @@
 var request = require("request");
 var jsdom = require("jsdom");
 var igaParser = require("./iga-parser");
-var { FlyerRepository } = require("../flyerRepository");
+var { FlyerRepository } = require("../Repositories/flyerRepository");
 const puppeteer = require("puppeteer");
+var fs = require('fs');
 
 const { JSDOM } = jsdom;
 const url =
@@ -17,20 +18,27 @@ class IgaFetcher {
   }
 
   async fetch() {
-    this.browser = await puppeteer.launch({args: ["--no-sandbox"]});
+    this.browser = await puppeteer.launch({ args: ["--no-sandbox"] });
     let iterator = new FlyerIterator();
     this.index = 1;
+    let offers = [];
     for await (const offer of iterator.Iterate(this.browser)) {
       try {
-        this.flyerRepo.create(offer);
+        //this.flyerRepo.create(offer);
         console.log(`offer ${offer.FullDisplayName} created (${this.index})`);
         this.index++;
+        offers.push(offer)
       } catch (e) {
         console.error(e);
       }
     }
 
     await this.browser.close();
+    fs.writeFile('flyers.json', JSON.stringify(offers), 'utf8', function (err) {
+      if (err) throw err;
+      console.log('complete');
+    });
+
   }
 }
 
@@ -41,7 +49,7 @@ class FlyerIterator {
   async *Iterate(browser) {
     let flyerHtml = await httpGet(browser, url);
     const flyerParser = new igaParser.FlyerPageParser(flyerHtml);
-    let offers = flyerParser.getUrls(); //.slice(0, n);
+    let offers = flyerParser.getUrls().slice(0, n);
     console.log(`found ${offers.length} offers in flyer`);
     for (let i = 0; i < offers.length; i++) {
       try {

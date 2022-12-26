@@ -1,5 +1,5 @@
 let igaFetcher = require("./Iga/iga-fetcher.js");
-let fyerRepository = require("./flyerRepository.js");
+let fyerRepository = require(".//Repositories/flyerRepository.js");
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
 

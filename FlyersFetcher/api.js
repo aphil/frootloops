@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
 let igaFetcher = require("./Iga/iga-fetcher.js");
-let { FlyerRepository } = require("./flyerRepository");
+let { FlyerRepository } = require("./Repositories/flyerRepository");
 
 let flyerRepo = new FlyerRepository();
 var fetcher = new igaFetcher.IgaFetcher(flyerRepo);
