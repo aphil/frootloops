@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
 let ricardoFetcher = require("./Ricardo/ricardo-fetcher.js");
-let { RecipeRepository } = require("./recipeRepository");
+let { RecipeRepository } = require("./Repositories/jsonRecipeRepository");
 
 let recipeRepo = new RecipeRepository();
 var fetcher = new ricardoFetcher.RicardoFetcher(recipeRepo);
